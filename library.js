@@ -20,8 +20,8 @@ let book2 = new Book("Python Programming", "Swaroop C H", 300, true)
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 
-function createTable(){
 const table = document.querySelector('table');
+function createTable(){
 for (row = 0; row < bookArray.length; row++) {
     tr = document.createElement('tr');
         tdTitle = document.createElement('td');
@@ -40,6 +40,7 @@ for (row = 0; row < bookArray.length; row++) {
 };
 };
 
+let cells = document.querySelector("td")
 const form = document.querySelector("form")
 form.addEventListener("submit", function(e){
   e.preventDefault()
@@ -49,6 +50,11 @@ form.addEventListener("submit", function(e){
   read = form.elements["read"].value
   let formBook = new Book(title,author,pages,read);
   addBookToLibrary(formBook);
+ 
+    while(table.hasChildNodes())
+    {
+       table.removeChild(table.firstChild);
+    }
   createTable()
   console.log(bookArray)
 });
