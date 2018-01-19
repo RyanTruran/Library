@@ -40,6 +40,7 @@ function createTable(){
     deleteB = document.createElement('button')
     toggleB = document.createElement('button')
     toggleB.classList.add("mystyle")
+    toggleB.dataset.number = row;
     deleteB.dataset.name = row;
     tr.appendChild(tdTitle);
     tr.appendChild(tdAuthor);
@@ -62,8 +63,8 @@ function createTable(){
     let toggleButton=document.querySelectorAll(".mystyle")
     ii=0
     for(i=0;i < toggleButton.length;i++){
-      toggleButton[i].addEventListener("click", function(){
-         bookArray[i].toggle();
+      toggleButton[i].addEventListener("click", function(e){
+         bookArray[e.target.dataset.number].toggle();
       });
     };
 
