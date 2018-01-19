@@ -7,31 +7,29 @@
 </head>
 <body>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Pages</th>
-    <th>Read Book?</th>
-  </tr>
-</table>
+<button>Add Book</button>
 
+<div class="container">
 <form>
   Title:<br>
-  <input type="text" name="title">
+  <input type="text" name="title" required>
   <br>
   Author:<br>
-  <input type="text" name="author">
+  <input type="text" name="author" required>
   <br>
   Pages:<br>
-  <input type="number" name="pages">
+  <input type="number" name="pages" required>
   <br>
-  Read?:<br>
-  <input type="checkbox" name="read">
+  Read?<br>
+  <input type="checkbox" name="read" required>
   <br><br>
   <input type="submit" value="Submit">
+  <button id="close">Exit</button>
 </form>
-  
+</div>
+
+<table>
+</table>  
   <script type="text/javascript" src="library.js"></script>
 </body>
 </html>
