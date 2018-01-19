@@ -5,8 +5,8 @@ const table = document.querySelector("table");
 const button = document.querySelector("button");
 const container = document.querySelector(".container");
 const close = document.querySelector("#close");
-const book1 = new Book("Ruby tutorial", "Micheal Hartl", 100, true);
-const book2 = new Book("Python Programming", "Swaroop C H", 300, true);
+const book1 = new Book("Ruby tutorial", "Micheal Hartl", 100, "Read");
+const book2 = new Book("Python Programming", "Swaroop C H", 300, "Not read");
 
 function Book(title,author,pages,read){
  this.title = title;
@@ -38,12 +38,15 @@ function createTable(){
     tdPages = document.createElement('td')
     tdRead = document.createElement('td')
     deleteB = document.createElement('button')
+    toggleB = document.createElement('button')
+    toggleB.classList.add("mystyle")
     deleteB.dataset.name = row;
     tr.appendChild(tdTitle);
     tr.appendChild(tdAuthor);
     tr.appendChild(tdPages);
     tr.appendChild(tdRead);
     tr.appendChild(deleteB).innerHTML="delete";
+    tr.appendChild(toggleB).innerHTML="Toggle read"
     tdTitle.innerHTML = bookArray[row].title;
     tdAuthor.innerHTML = bookArray[row].author;
     tdPages.innerHTML = bookArray[row].pages;
@@ -52,10 +55,28 @@ function createTable(){
   };
   let deleteObj=document.querySelectorAll("[data-name]")
   for(i=0;i < deleteObj.length;i++){
-    deletes[i].addEventListener("click",function(e){
+    deleteObj[i].addEventListener("click",function(e){
       removeBook(e.target.dataset.name);
     });
+
+    let toggleButton=document.querySelectorAll(".mystyle")
+    ii=0
+    for(i=0;i < toggleButton.length;i++){
+      toggleButton[i].addEventListener("click", function(){
+         bookArray[i].toggle();
+      });
+    };
+
   }
+};
+
+Book.prototype.toggle = function(){
+  this.read == "Read" ? this.read="Not read" : this.read="Read";
+  while(table.hasChildNodes())
+  {
+   table.removeChild(table.firstChild);
+ };
+ createTable()
 };
 
 function removeBook(index) {
