@@ -30,7 +30,7 @@ function createTable(){
   table.appendChild(title).innerHTML="Title";
   table.appendChild(author).innerHTML="Author";
   table.appendChild(pages).innerHTML="Pages";
-  table.appendChild(read).innerHTML="Read?";
+  table.appendChild(read).innerHTML="Read";
   for (row = 0; row < bookArray.length; row++) {
     tr = document.createElement('tr');
     tdTitle = document.createElement('td');
@@ -48,15 +48,12 @@ function createTable(){
     tdAuthor.innerHTML = bookArray[row].author;
     tdPages.innerHTML = bookArray[row].pages;
     tdRead.innerHTML = bookArray[row].read;
-    table.appendChild(tr).dataset.name = row;
-    console.log(tr.dataset)
+    table.appendChild(tr);
   };
-  let deletes=document.querySelectorAll("[data-name]")
-  for(i=0;i < deletes.length;i++){
+  let deleteObj=document.querySelectorAll("[data-name]")
+  for(i=0;i < deleteObj.length;i++){
     deletes[i].addEventListener("click",function(e){
-      console.log(e.target.dataset.name)
-      removeBook(e.target.dataset.name)
-      e.stopPropagation();
+      removeBook(e.target.dataset.name);
     });
   }
 };
