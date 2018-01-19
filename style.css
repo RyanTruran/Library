@@ -22,4 +22,5 @@ tr:nth-child(even) {
   display:none;
   width: 100%;
   background: #dddddd;
+  font-weight: bold;
 }

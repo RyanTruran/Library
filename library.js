@@ -37,17 +37,38 @@ function createTable(){
     tdAuthor = document.createElement('td')
     tdPages = document.createElement('td')
     tdRead = document.createElement('td')
+    deleteB = document.createElement('button')
+    deleteB.dataset.name = row;
     tr.appendChild(tdTitle);
     tr.appendChild(tdAuthor);
     tr.appendChild(tdPages);
     tr.appendChild(tdRead);
+    tr.appendChild(deleteB).innerHTML="delete";
     tdTitle.innerHTML = bookArray[row].title;
     tdAuthor.innerHTML = bookArray[row].author;
     tdPages.innerHTML = bookArray[row].pages;
     tdRead.innerHTML = bookArray[row].read;
-    table.appendChild(tr);
+    table.appendChild(tr).dataset.name = row;
+    console.log(tr.dataset)
   };
+  let deletes=document.querySelectorAll("[data-name]")
+  for(i=0;i < deletes.length;i++){
+    deletes[i].addEventListener("click",function(e){
+      console.log(e.target.dataset.name)
+      removeBook(e.target.dataset.name)
+      e.stopPropagation();
+    });
+  }
 };
+
+function removeBook(index) {
+  bookArray.splice(index,1);
+  while(table.hasChildNodes())
+  {
+   table.removeChild(table.firstChild);
+ };
+ createTable()
+}
 
 button.addEventListener("click", function(){
   container.style.display="block";
