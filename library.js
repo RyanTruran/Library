@@ -50,7 +50,7 @@ function createTable(){
     tr.appendChild(tdAuthor);
     tr.appendChild(tdPages);
     tr.appendChild(toggleC).appendChild(toggleB).innerHTML=bookArray[row].read
-    tr.appendChild(deleteC).appendChild(deleteB).innerHTML="delete";
+    tr.appendChild(deleteC).appendChild(deleteB).innerHTML="Delete book";
     tdTitle.innerHTML = bookArray[row].title;
     tdAuthor.innerHTML = bookArray[row].author;
     tdPages.innerHTML = bookArray[row].pages;
