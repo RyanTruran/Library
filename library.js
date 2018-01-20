@@ -23,35 +23,37 @@ function addBookToLibrary(book){
 };
 
 function createTable(){
-  title=document.createElement('th')
-  author=document.createElement('th')
-  pages=document.createElement('th')
-  read=document.createElement('th')
+  title=document.createElement('th');
+  author=document.createElement('th');
+  pages=document.createElement('th');
+  read=document.createElement('th');
+  edit=document.createElement('th');
   table.appendChild(title).innerHTML="Title";
   table.appendChild(author).innerHTML="Author";
   table.appendChild(pages).innerHTML="Pages";
   table.appendChild(read).innerHTML="Read";
+  table.appendChild(edit).innerHTML="Edit";
   for (row = 0; row < bookArray.length; row++) {
     tr = document.createElement('tr');
     tdTitle = document.createElement('td');
-    tdAuthor = document.createElement('td')
-    tdPages = document.createElement('td')
-    tdRead = document.createElement('td')
-    deleteB = document.createElement('button')
-    toggleB = document.createElement('button')
-    toggleB.classList.add("mystyle")
+    tdAuthor = document.createElement('td');
+    tdPages = document.createElement('td');
+    tdRead = document.createElement('td');
+    toggleC = document.createElement('td');
+    deleteC = document.createElement('td');
+    deleteB = document.createElement('button');
+    toggleB = document.createElement('button');
+    toggleB.classList.add("mystyle");
     toggleB.dataset.number = row;
     deleteB.dataset.name = row;
     tr.appendChild(tdTitle);
     tr.appendChild(tdAuthor);
     tr.appendChild(tdPages);
-    tr.appendChild(tdRead);
-    tr.appendChild(deleteB).innerHTML="delete";
-    tr.appendChild(toggleB).innerHTML="Toggle read"
+    tr.appendChild(toggleC).appendChild(toggleB).innerHTML=bookArray[row].read
+    tr.appendChild(deleteC).appendChild(deleteB).innerHTML="delete";
     tdTitle.innerHTML = bookArray[row].title;
     tdAuthor.innerHTML = bookArray[row].author;
     tdPages.innerHTML = bookArray[row].pages;
-    tdRead.innerHTML = bookArray[row].read;
     table.appendChild(tr);
   };
   let deleteObj=document.querySelectorAll("[data-name]")
@@ -59,16 +61,13 @@ function createTable(){
     deleteObj[i].addEventListener("click",function(e){
       removeBook(e.target.dataset.name);
     });
-
-    let toggleButton=document.querySelectorAll(".mystyle")
-    ii=0
+    let toggleButton=document.querySelectorAll(".mystyle");
     for(i=0;i < toggleButton.length;i++){
       toggleButton[i].addEventListener("click", function(e){
-         bookArray[e.target.dataset.number].toggle();
-      });
+       bookArray[e.target.dataset.number].toggle();
+     });
     };
-
-  }
+  };
 };
 
 Book.prototype.toggle = function(){
@@ -86,29 +85,29 @@ function removeBook(index) {
   {
    table.removeChild(table.firstChild);
  };
- createTable()
+ createTable();
 }
 
 button.addEventListener("click", function(){
   container.style.display="block";
   button.style.display="none";
-})
+});
 
 form.addEventListener("submit", function(e){
-  e.preventDefault()
+  e.preventDefault();
   button.style.display="block";
   container.style.display="none";
-  title = form.elements["title"].value
-  author = form.elements["author"].value
-  pages = form.elements["pages"].value
-  read = form.elements["read"].value
+  title = form.elements["title"].value;
+  author = form.elements["author"].value;
+  pages = form.elements["pages"].value;
+  read = form.elements["read"].value;
   let formBook = new Book(title,author,pages,read);
   addBookToLibrary(formBook);
   while(table.hasChildNodes())
   {
    table.removeChild(table.firstChild);
  };
- createTable()
+ createTable();
 });
 
 close.addEventListener("click", function(){
@@ -118,4 +117,4 @@ close.addEventListener("click", function(){
 
 addBookToLibrary(book1);
 addBookToLibrary(book2);
-createTable()
+createTable();
